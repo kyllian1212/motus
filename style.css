@@ -1,0 +1,193 @@
+@media(min-width: 0px) and (max-width: 850px)
+{
+    body {
+        font-size: 13px;
+    }
+}
+
+body {
+    font-family: Verdana;
+    margin: 20px;
+}
+
+#cache {
+    position: fixed;
+    margin: -50px;
+    height: 0px;
+    width: 0px;
+    background-color: black;
+    opacity: 0%;
+    transition: opacity 500ms, visibility 500ms;
+    z-index: 50;
+}
+
+#titre {
+    /*border: solid 1px;*/
+    text-align: center;
+    padding: 5px;
+    font-weight: bold;
+    background-color: black;
+}
+
+article {
+    /*border: solid 1px;*/
+    padding: 5px;
+    background-color: paleturquoise;
+}
+
+#debut {
+    text-align: center;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+table,
+td {
+    border: 1px solid white;
+}
+
+table {
+    background-color:deepskyblue;
+    font-weight: bold;
+    color:white;
+}
+
+td.c {
+    background-color: #fcb800;
+}
+
+#retour {
+    float:right;
+}
+
+#regles {
+    position: fixed;
+    top: -500px;
+    margin-right: 20px;
+    transition: top 500ms;
+    opacity: 100%;
+    z-index: 500;
+}
+
+#jeu {
+    position: static;
+    margin-top: 10px;
+    text-align: center;
+    vertical-align: middle;
+    height: 20px;
+    transition: height 500ms ease-in-out;
+}
+
+#jeudem {
+    transition: opacity 250ms;
+}
+
+#test {
+    visibility: hidden;
+}
+
+#grillenum {
+    visibility: hidden;
+    text-align: center;
+    opacity: 0%;
+    transition: opacity 500ms;
+}
+
+#motstrouv {
+    position:relative;
+    top: -400px;
+    visibility: hidden;
+    opacity: 0%;
+    transition: opacity 500ms;
+}
+
+#partnb {
+    visibility: hidden;
+}
+
+#nbtire {
+    visibility: hidden;
+    transition: opacity 500ms;
+    opacity: 0%;
+}
+/*------------------------------------------*/
+
+.tableauVide{
+    visibility: hidden;
+}
+#bouleMotus{
+    position: relative;
+}
+#unCanvas{
+    width:350px ;
+    height:200px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+}
+.CanvasInvisible{
+    width:350px ;
+    height:200px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    visibility: hidden;
+}
+#unTexte {
+    width: 350px;
+    height: 200px;
+    position: absolute;
+    left: 60px;
+    top: 50px;
+    z-index: 0;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 0; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+​
+    /* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+​
+    /* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+​
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+#messageEssais {
+    position: fixed;
+    top: -500px;
+    margin-right: 20px;
+    transition: top 500ms;
+    opacity: 100%;
+    z-index: 500;
+}
