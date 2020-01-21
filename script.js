@@ -109,11 +109,13 @@ function partienombres2()
     partcont.style.visibility = "hidden";
     partnb.style.visibility = "visible";
     partnb.onclick = function () {
+        var sTirage = new Audio('./sound/tirage.ogg');
+        sTirage.play();
         partnb.style.visibility = "hidden";
         nbtire.style.visibility = "visible";
         nbtire.style.opacity = "100%";
         nbtire.innerText = "Tirage du nombre pour le joueur " + joueur + "...";
-        setTimeout(partienombres3, 2000);
+        setTimeout(partienombres3, 1900);
     };
 }
 
@@ -231,6 +233,8 @@ function tirage() {
                         document.getElementById("c1" + val).innerText = grillej1[i - 1][j].toString();
                         document.getElementById("nbtire").innerText = nb;
                         nbg = nb;
+                        var sBoule = new Audio('./sound/boule.ogg');
+                        sBoule.play();
                         partienombres4();
                         val++;
                         if ( victoire() === true) {
@@ -266,6 +270,8 @@ function tirage() {
             document.getElementById("nbtire").innerText = "BOULE NOIRE";
             nbg = nb;
             joueur = 2;
+            var sBouleNoire = new Audio('./sound/bouleNoire.ogg');
+            sBouleNoire.play();
             partienombres4();
         }
     }
@@ -286,6 +292,8 @@ function tirage() {
                         document.getElementById("c2" + val).innerText = grillej2[i - 1][j].toString();
                         document.getElementById("nbtire").innerText = nb;
                         nbg = nb;
+                        var sBoule = new Audio('./sound/boule.ogg');
+                        sBoule.play();
                         partienombres4();
                         val++;
 
@@ -316,6 +324,8 @@ function tirage() {
         {
             document.getElementById("nbtire").innerText = "BOULE NOIRE";
             joueur = 1;
+            var sBouleNoire = new Audio('./sound/bouleNoire.ogg');
+            sBouleNoire.play();
             partienombres4();
         }
     }
@@ -464,6 +474,8 @@ function checkReponse() {
         cache.style.width = "5000px";
         cache.style.visibility = "visible";
         document.getElementById("messageErreur").innerText = "Votre mot est d'une longueur inférieure à " + mot.length;
+        var sMauv = new Audio('./sound/beepMauvais.ogg');
+        sMauv.play();
         btnrm.onclick = function () {
             mEssais.style.top = "-500px";
             cache.style.opacity = "0%";
@@ -479,6 +491,8 @@ function checkReponse() {
         cache.style.width = "5000px";
         cache.style.visibility = "visible";
         document.getElementById("messageErreur").innerText = "Votre mot est d'une longueur supérieure à " + mot.length;
+        var sMauv = new Audio('./sound/beepMauvais.ogg');
+        sMauv.play();
         btnrm.onclick = function () {
             mEssais.style.top = "-500px";
             cache.style.opacity = "0%";
@@ -495,6 +509,8 @@ function checkReponse() {
             cache.style.width = "5000px";
             cache.style.visibility = "visible";
             document.getElementById("messageErreur").innerText = "Bravo! Vous avez trouvé " + mot;
+            var sGagne = new Audio('./sound/beepGagne.ogg');
+            sGagne.play();
             btnrm.onclick = function () {
                 mEssais.style.top = "-500px";
                 cache.style.opacity = "0%";
@@ -611,6 +627,8 @@ function verifEssais() {
         cache.style.width = "5000px";
         cache.style.visibility = "visible";
         document.getElementById("messageErreur").innerText = "Vous avez effectué le nombre d'essais maximum";
+        var sPerdu = new Audio('./sound/beepPerdu.ogg');
+        sPerdu.play();
         btnrm.onclick = function () {
             mEssais.style.top = "-500px";
             cache.style.opacity = "0%";
