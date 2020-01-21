@@ -1,7 +1,7 @@
 var btn = document.getElementById("btnreg");
-var btnv= document.getElementById("recommencer");
 var btnr = document.getElementById("retour");
 var btnrm= document.getElementById("retourM");
+var btnv= document.getElementById("recommencer");
 var reg = document.getElementById("regles");
 var mEssais = document.getElementById("messageEssais");
 var cache = document.getElementById("cache");
@@ -226,14 +226,32 @@ function tirage() {
                 for(let j = 0; j < 5; j++)
                 {
                     val++;
-                    if (grillej1[i-1][j] === nb)
-                    {
-                        grillej1[i-1][j] = "X";
-                        document.getElementById("c1" + val).innerText = grillej1[i-1][j].toString();
+                    if (grillej1[i-1][j] === nb) {
+                        grillej1[i - 1][j] = "X";
+                        document.getElementById("c1" + val).innerText = grillej1[i - 1][j].toString();
                         document.getElementById("nbtire").innerText = nb;
                         nbg = nb;
                         partienombres4();
                         val++;
+                        if ( victoire() === true) {
+                            mEssais.style.top = "20px";
+                            cache.style.opacity = "40%";
+                            cache.style.height = "5000px";
+                            cache.style.width = "5000px";
+                            cache.style.visibility = "visible";
+                            document.getElementById("messageErreur").innerText = "Félicitations! Vous avez gagné";
+                            btnrm.onclick = function () {
+                                mEssais.style.top = "-500px";
+                                cache.style.opacity = "0%";
+                                cache.style.visibility = "hidden";
+                                grillenum.style.visibility = "hidden";
+                                nbtire.style.visibility = "hidden";
+                                txtBoule(false);
+                                fillCircle(false);
+                                partie1();
+                                Continue();
+                            }
+                        }
                     }
                     console.log(val);
                 }
@@ -259,28 +277,39 @@ function tirage() {
             nb = Math.floor(Math.random() * (80 - 2) + 2);
         }
         let val = 0;
-        if (nb > 0 && nb < 70)
-        {
-            for(let i = 1; i < 6; i++)
-            {
-                for(let j = 0; j < 5; j++)
-                {
+        if (nb > 0 && nb < 70) {
+            for (let i = 1; i < 6; i++) {
+                for (let j = 0; j < 5; j++) {
                     val++;
-                    if (grillej2[i-1][j] === nb)
-                    {
-                        grillej2[i-1][j] = "X";
-                        document.getElementById("c2" + val).innerText = grillej2[i-1][j].toString();
+                    if (grillej2[i - 1][j] === nb) {
+                        grillej2[i - 1][j] = "X";
+                        document.getElementById("c2" + val).innerText = grillej2[i - 1][j].toString();
                         document.getElementById("nbtire").innerText = nb;
                         nbg = nb;
                         partienombres4();
                         val++;
+
+                        if (victoire() === true) {
+                            mEssais.style.top = "20px";
+                            cache.style.opacity = "40%";
+                            cache.style.height = "5000px";
+                            cache.style.width = "5000px";
+                            cache.style.visibility = "visible";
+                            document.getElementById("messageErreur").innerText = "Félicitations! Vous avez gagné";
+                            btnr.onclick = function () {
+                                mEssais.style.top = "-500px";
+                                cache.style.opacity = "0%";
+                                cache.style.visibility = "hidden";
+                                partie1();
+                                Continue();
+                            }
+                        }
+                        console.log(val);
                     }
-                    console.log(val);
                 }
-            }
-            if(val===25)
-            {
-                tirage();
+                if (val === 25) {
+                    tirage();
+                }
             }
         }
         else if (nb === 72 || nb === 74 || nb === 76 || nb === 78 || nb === 80)
@@ -292,20 +321,91 @@ function tirage() {
     }
 }
 
+//vérifie si un joueur à gagné
+function victoire() {
+    var nbX = 0;
+    var win = false;
+    if (joueur === 1) {
+        for (let i = 1; i < 6; i++) {
+            for (let j = 0; j < 5; j++) {
+                if (grillej1[i - 1][j] === "X") {
+                    nbX += 1;
+                }
+            }
+            if (nbX === 5) {
+                win = true;
+                break;
+            } else {
+                nbX = 0;
+            }
+
+        }
+        if (win ===false){
+            for  (let j = 0; j < 5; j++) {
+                for (let i = 1; i < 6; i++) {
+                    if (grillej1[i - 1][j] === "X") {
+                        nbX += 1;
+                    }
+                }
+                if (nbX === 5) {
+                    win = true;
+                    break;
+                } else {
+                    nbX = 0;
+                }
+
+            }
+        }
+    } else {
+        for (let i = 1; i < 6; i++) {
+            for (let j = 0; j < 5; j++) {
+                if (grillej2[i - 1][j] === "X") {
+                    nbX += 1;
+                }
+            }
+            if (nbX === 5) {
+                win = true;
+                break;
+            } else {
+                nbX = 0;
+            }
+
+        }
+        if (win ===false){
+            for  (let j = 0; j < 5; j++) {
+                for (let i = 1; i < 6; i++) {
+                    if (grillej2[i - 1][j] === "X") {
+                        nbX += 1;
+                    }
+                }
+                if (nbX === 5) {
+                    win = true;
+                    break;
+                } else {
+                    nbX = 0;
+                }
+
+            }
+        }
+    }
+    return win;
+}
+
+
 // ---------------------------------------------------------------------------------------------------------------
 // Ici, la requête sera émise de façon synchrone.
 const req = new XMLHttpRequest();
 req.open('GET', 'http://localhost/webServiceMotus/', false);
 req.send(null);
-const changTour= false;
-const newMot= true;
+const changTour = false;
+const newMot = true;
 let mot;
 let mesMots;
-let nbEssais=0;
-const html={
-    reponse : undefined,
+let nbEssais = 0;
+const html = {
+    reponse: undefined,
     nomJ1: undefined,
-    nomJ2:undefined
+    nomJ2: undefined
 };
 window.onload = function () {
     html.reponse = document.getElementById("rValue");
@@ -320,35 +420,31 @@ window.onload = function () {
 
     initJeu(mesMots);
 };
-function connexion()
-{
+
+function connexion() {
 
 }
-function initJeu(){
+
+function initJeu() {
     let longueurTab = mesMots.length;
-    let i = Math.floor(Math.random()*longueurTab+1);
+    let i = Math.floor(Math.random() * longueurTab + 1);
     console.log(mesMots[i]);
     mot = mesMots[i].mots;
     mot = mot.toUpperCase();
-    console.log (mot);
-    document.getElementById("leMot").textContent = mot;
 }
 
 
 function resetGame(boolPartie) {
-    if(joueur === 1)
-    {
+    if (joueur === 1) {
         joueur = 2;
-    }
-    else if(joueur === 2)
-    {
+    } else if (joueur === 2) {
         joueur = 1;
     }
     jeudem.innerText = "Mot à trouver - Joueur " + joueur;
-    if(boolPartie===true){
-        nbEssais=0;
+    if (boolPartie === true) {
+        nbEssais = 0;
         document.getElementById("tabReponse").classList.add("tableauVide");
-        let table =document.getElementById("tableReponse");
+        let table = document.getElementById("tableReponse");
         while (table.firstChild) {
             table.removeChild(table.firstChild);
         }
@@ -357,7 +453,7 @@ function resetGame(boolPartie) {
 
 }
 
-function checkReponse(){
+function checkReponse() {
     console.log(nbEssais);
     var monMot = html.reponse.value.toUpperCase();
     if (monMot.length < mot.length) {
@@ -414,33 +510,32 @@ function checkReponse(){
 }
 
 
-function generate_table(monMot){
+function generate_table(monMot) {
     var tailleMot = monMot.length;
-    let leMot= verifTaille(tailleMot,monMot);
+    let leMot = verifTaille(tailleMot, monMot);
     // get the reference for the body
     var body = document.getElementsByTagName("body")[0];
-    var tableBody= document.getElementById("tableReponse");
+    var tableBody = document.getElementById("tableReponse");
     // creating all cells
     for (var i = 0; i < 1; i++) {
         // creates a table row
         var row = document.createElement("tr");
 
-        for (var j = 0; j <8 ; j++) {
+        for (var j = 0; j < 8; j++) {
             // Create a <td> element and a text node, make the text
             // node the contents of the <td>, and put the <td> at
             // the end of the table row
             var cell = document.createElement("td");
-            cell.setAttribute("width","20px");
+            cell.setAttribute("width", "20px");
             var cellText = document.createTextNode(leMot[j]);
             cell.appendChild(cellText);
             row.appendChild(cell);
 
-            if(leMot[j]===mot[j]){
+            if (leMot[j] === mot[j]) {
 
-                cell.setAttribute("bgcolor","#d62932");
-            }
-            else{
-                memeLettre(cell,leMot[j],mot);
+                cell.setAttribute("bgcolor", "#d62932");
+            } else {
+                memeLettre(cell, leMot[j], mot);
             }
 
         }
@@ -451,72 +546,65 @@ function generate_table(monMot){
 
 
 }
-function memeLettre(cell,lettre,leMot){
-    for (var i=0;i<leMot.length;i++){
-        if(lettre ===leMot[i]){
-            cell.setAttribute("bgcolor","#fcb800");
+
+function memeLettre(cell, lettre, leMot) {
+    for (var i = 0; i < leMot.length; i++) {
+        if (lettre === leMot[i]) {
+            cell.setAttribute("bgcolor", "#fcb800");
         }
-    }
-}
-function txtBoule(noEff){
-    var canvas = document.getElementById("unTexte");
-    var ctx = canvas.getContext("2d");
-    if(noEff == true)
-    {
-        ctx.font = "30px Arial";
-        ctx.fillText(nbg, 10, 50);
-    }
-    else
-    {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
     }
 }
 
-function fillCircle(noEff)
-{
+function txtBoule(noEff) {
+    var canvas = document.getElementById("unTexte");
+    var ctx = canvas.getContext("2d");
+    if (noEff == true) {
+        ctx.font = "30px Arial";
+        ctx.fillText(nbg, 10, 50);
+    } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+}
+
+function fillCircle(noEff) {
     var canvas = document.getElementById("unCanvas");
     var context = canvas.getContext("2d");
-    if(noEff == true)
-    {
+    if (noEff == true) {
         context.beginPath();
-        if( nbg >=71 && nbg <=80){
-            context.fillStyle="black";
-        }
-        else if (joueur === 1){
-            context.fillStyle="yellow";
-        }
-        else{
-            context.fillStyle="#4169E1";
+        if (nbg >= 71 && nbg <= 80) {
+            context.fillStyle = "black";
+        } else if (joueur === 1) {
+            context.fillStyle = "yellow";
+        } else {
+            context.fillStyle = "#4169E1";
         }
         context.arc(80, 80, 70, 0, 2 * Math.PI);
         context.fill();
         context.closePath();
         document.getElementById("unCanvas").classList.remove("CanvasInvisible");
-    }
-    else
-    {
+    } else {
         document.getElementById("unCanvas").classList.add("CanvasInvisible");
     }
 }
 
-function addRow(monMot){
+function addRow(monMot) {
     document.getElementById("tabReponse").classList.remove("tableauVide");
     generate_table(monMot);
 }
-function verifTaille(tailleMot,monMot){
-    if(tailleMot<8){
-        let dif = 8-tailleMot
-        for (let i=0;i<dif;i++){
-            monMot+=".";
+
+function verifTaille(tailleMot, monMot) {
+    if (tailleMot < 8) {
+        let dif = 8 - tailleMot
+        for (let i = 0; i < dif; i++) {
+            monMot += ".";
         }
         console.log(monMot)
     }
     return monMot;
 }
 
-function verifEssais(){
-    if (nbEssais  === 6)
-    {
+function verifEssais() {
+    if (nbEssais === 6) {
         mEssais.style.top = "20px";
         cache.style.opacity = "40%";
         cache.style.height = "5000px";
@@ -532,14 +620,13 @@ function verifEssais(){
 
     }
 }
-function Continue(){
-    nbEssais=0;
+
+function Continue() {
+    nbEssais = 0;
     document.getElementById("tabReponse").classList.add("tableauVide");
-    let table =document.getElementById("tableReponse");
+    let table = document.getElementById("tableReponse");
     while (table.firstChild) {
         table.removeChild(table.firstChild);
     }
     initJeu();
 }
-
-//t
