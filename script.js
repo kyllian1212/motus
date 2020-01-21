@@ -541,3 +541,5 @@ function Continue(){
     }
     initJeu();
 }
+
+//t
