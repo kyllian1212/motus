@@ -191,3 +191,7 @@ td.c {
     opacity: 100%;
     z-index: 500;
 }
+
+#recommencer{
+    visibility: hidden;
+}
