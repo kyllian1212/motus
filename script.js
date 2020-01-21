@@ -1,4 +1,5 @@
 var btn = document.getElementById("btnreg");
+var btnv= document.getElementById("recommencer");
 var btnr = document.getElementById("retour");
 var btnrm= document.getElementById("retourM");
 var reg = document.getElementById("regles");
