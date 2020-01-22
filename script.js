@@ -45,6 +45,7 @@ jouer.onclick = function ()
 };
 function partie1()
 {
+    partcont.style.visibility = "hidden";
     jeudem.innerText = "Début de la partie!";
     jeudem.style.opacity = "100%";
     setTimeout(partie2, 1500);
@@ -61,6 +62,7 @@ function partie3()
     jeudem.style.opacity = "100%";
     jeu.style.height = "500px";
     grillenum.style.visibility = "visible";
+    partcont.style.visibility = "visible";
     gengrilles();
     setTimeout(partie4, 500);
 }
@@ -441,6 +443,7 @@ function initJeu() {
     console.log(mesMots[i]);
     mot = mesMots[i].mots;
     mot = mot.toUpperCase();
+    document.getElementById("leMot").textContent = "Première lettre: " + mot.substring(0, 1);
 }
 
 
